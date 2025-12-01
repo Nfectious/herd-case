@@ -51,6 +51,13 @@ app.get('/api/case-data', (req, res) => {
 
       timeline: [
         {
+          date: "May–June 2025",
+          event: "Progressive sells claimant's vehicle at Copart – Conversion of Property",
+          details: "Progressive delivered VIN 2HKRW1H23LH404578 to Copart Knoxville (Lot 57704245) and sold it at salvage auction. No total-loss offer, no settlement, no payment ever issued. Salvage proceeds retained 100%.",
+          significance: "Violation of Tenn. Code Ann. §56-7-903 and §56-8-105(6).",
+          evidence: ["copart_seller.jpg", "copart_lot.jpg", "overseas_ad.jpg"]
+        },
+        {
           date: "December 2023 / January 2024",
           event: "Progressive Insurance Coverage Begins",
           details: "Travis Herd added to mother Dorothy's Progressive policy for Honda vehicle. Premium payments begin and continue for 16-17 months without any underwriting objections regarding ownership or title.",
