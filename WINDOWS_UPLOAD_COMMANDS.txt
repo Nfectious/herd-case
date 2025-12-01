@@ -1,0 +1,154 @@
+================================================================================
+  FILE UPLOAD COMMANDS - Windows to Contabo VPS
+================================================================================
+
+BEFORE YOU START:
+-----------------
+Replace YOUR_VPS_IP with your actual Contabo VPS IP address in all commands below.
+
+
+METHOD 1: WinSCP (RECOMMENDED - NO COMMANDS NEEDED)
+----------------------------------------------------
+1. Download: https://winscp.net/eng/download.php
+2. Install and open WinSCP
+3. Create new connection:
+   - File protocol: SFTP
+   - Host name: YOUR_VPS_IP
+   - Port: 22
+   - User name: root
+   - Password: [your VPS password]
+4. Click "Login"
+5. Left side: Browse to C:\Users\nfectious\Downloads\claim
+6. Right side: Browse to /root/
+7. Select ALL files and folders on left
+8. Drag to right side
+9. Wait for upload to complete
+10. Close WinSCP
+
+
+METHOD 2: PowerShell/Command Prompt (ONE COMMAND)
+--------------------------------------------------
+Open PowerShell or Command Prompt and run:
+
+scp -r C:\Users\nfectious\Downloads\claim root@YOUR_VPS_IP:/root/
+
+Example (replace IP):
+scp -r C:\Users\nfectious\Downloads\claim root@192.168.1.100:/root/
+
+Enter your VPS password when prompted.
+
+
+METHOD 3: Using WSL (Windows Subsystem for Linux)
+--------------------------------------------------
+If you have WSL installed:
+
+scp -r /mnt/c/Users/nfectious/Downloads/claim root@YOUR_VPS_IP:/root/
+
+
+AFTER UPLOAD - CONNECT TO VPS:
+-------------------------------
+ssh root@YOUR_VPS_IP
+
+Example:
+ssh root@192.168.1.100
+
+
+VERIFY FILES UPLOADED:
+----------------------
+Once connected via SSH, run:
+
+ls -la /root/claim/
+
+You should see:
+- server.js
+- package.json
+- deploy.sh
+- public/ (folder)
+- attorney_brief.txt
+- ATTORNEY_BRIEF_COMPREHENSIVE_COMPLETE.docx
+- CRITICAL_CORRECTION_MEMO.txt
+- README.md
+- etc.
+
+
+MOVE TO CORRECT DIRECTORY:
+---------------------------
+mv /root/claim /var/www/herd-case
+
+
+RUN DEPLOYMENT:
+---------------
+cd /var/www/herd-case
+chmod +x deploy.sh
+sudo bash deploy.sh
+
+
+ALTERNATIVE: Manual File Upload via SFTP Client
+------------------------------------------------
+Other SFTP clients you can use (all free):
+- FileZilla: https://filezilla-project.org/
+- Cyberduck: https://cyberduck.io/
+- MobaXterm: https://mobaxterm.mobatek.net/
+
+Connection details for any client:
+- Protocol: SFTP
+- Host: YOUR_VPS_IP
+- Port: 22
+- Username: root
+- Password: [your password]
+
+Upload entire folder:
+From: C:\Users\nfectious\Downloads\claim
+To: /root/ or /var/www/
+
+
+TROUBLESHOOTING:
+----------------
+"Permission denied" → Make sure using 'root' user or add 'sudo'
+"Connection refused" → Check VPS IP address, make sure VPS is running
+"Directory not found" → Create directory first: ssh root@IP "mkdir -p /var/www"
+"Files won't upload" → Check Windows Firewall, ensure SSH port 22 is open
+
+
+ESTIMATED UPLOAD TIME:
+----------------------
+File size: ~30 MB
+Upload time (typical):
+- Fast connection: 10-30 seconds
+- Normal connection: 1-2 minutes
+- Slow connection: 3-5 minutes
+
+
+WHAT HAPPENS NEXT:
+------------------
+1. Files upload to VPS → /root/claim/
+2. You SSH into VPS
+3. Move files: mv /root/claim /var/www/herd-case
+4. Run deployment script: bash deploy.sh
+5. Script automatically installs & configures everything
+6. Website goes live at: https://claim.bsapservices.com
+
+
+COMPLETE WORKFLOW (ALL COMMANDS):
+----------------------------------
+
+# From Windows PowerShell:
+scp -r C:\Users\nfectious\Downloads\claim root@YOUR_VPS_IP:/root/
+ssh root@YOUR_VPS_IP
+
+# Once connected to VPS:
+mv /root/claim /var/www/herd-case
+cd /var/www/herd-case
+chmod +x deploy.sh
+sudo bash deploy.sh
+
+# Follow the prompts, press Enter when asked
+
+# Done! Visit: https://claim.bsapservices.com
+
+
+NEED HELP?
+----------
+See full guide: DEPLOY_TO_CONTABO.md
+
+================================================================================

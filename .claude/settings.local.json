@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell -Command \"Get-Content ''C:\\Users\\nfectious\\Downloads\\claim\\ATTORNEY_BRIEF_COMPREHENSIVE_COMPLETE.docx'' -Raw\")",
+      "Bash(where:*)",
+      "Bash(nul)",
+      "Bash(python -c:*)",
+      "Bash(\"C:\\Users\\nfectious\\Downloads\\claim\\attorney_brief.txt\")",
+      "Bash(pip install:*)",
+      "Bash(npm install:*)",
+      "Bash(node server.js:*)",
+      "Bash(curl:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

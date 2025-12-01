@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Legal case documentation: Travis Herd v. Progressive Insurance Company - Systematic Bad Faith Insurance Practices">
+    <title>Travis Herd v. Progressive Insurance - Case Documentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+        <p>Loading case documentation...</p>
+    </div>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>Herd v. Progressive</h1>
+                <p class="nav-subtitle">Case Documentation</p>
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#overview" class="nav-link active">Overview</a></li>
+                <li><a href="#timeline" class="nav-link">Timeline</a></li>
+                <li><a href="#evidence" class="nav-link">Evidence</a></li>
+                <li><a href="#legal" class="nav-link">Legal Claims</a></li>
+                <li><a href="#impact" class="nav-link">Impact</a></li>
+                <li><a href="#documents" class="nav-link">Documents</a></li>
+                <li><a href="#search" class="nav-link">Search</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="page-title" id="caseTitle">Travis Herd v. Progressive Insurance Company</h1>
+                <p class="page-subtitle" id="caseSubtitle">Multiple Claims - Systematic Bad Faith - Regulatory Corruption</p>
+                <p class="last-updated">Last Updated: <span id="lastUpdated">November 27, 2025</span></p>
+            </header>
+
+            <!-- Overview Section -->
+            <section id="overview" class="content-section active">
+                <div class="section-header">
+                    <h2>Case Overview</h2>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="lead" id="overviewSummary"></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Key Points</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="key-points-list" id="keyPointsList"></ul>
+                    </div>
+                </div>
+
+                <div class="card alert-warning">
+                    <div class="card-header">
+                        <h3>Claimant's Medical Status</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4>Pre-existing Conditions:</h4>
+                        <ul id="medicalConditions"></ul>
+                        <h4>Impact:</h4>
+                        <p id="medicalImpact"></p>
+                        <h4>Family Conflict of Interest:</h4>
+                        <p id="familyConflict" class="text-danger"></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline Section -->
+            <section id="timeline" class="content-section">
+                <div class="section-header">
+                    <h2>Case Timeline</h2>
+                    <p>Chronological sequence of events documenting systematic bad faith</p>
+                </div>
+                <div class="timeline" id="timelineContainer"></div>
+            </section>
+
+            <!-- Evidence Section -->
+            <section id="evidence" class="content-section">
+                <div class="section-header">
+                    <h2>Critical Evidence</h2>
+                    <p>Documentation of Progressive's systematic bad faith practices</p>
+                </div>
+                <div id="evidenceContainer"></div>
+
+                <div class="card alert-info">
+                    <div class="card-header">
+                        <h3>Systematic Bad Faith: 10-Point Pattern</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="systematicBadFaithContainer"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Legal Claims Section -->
+            <section id="legal" class="content-section">
+                <div class="section-header">
+                    <h2>Legal Claims</h2>
+                    <p>Statutory and common law violations</p>
+                </div>
+                <div id="legalClaimsContainer"></div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Damages</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="damages-grid" id="damagesContainer"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Impact Section -->
+            <section id="impact" class="content-section">
+                <div class="section-header">
+                    <h2>Personal Impact</h2>
+                    <p>The human cost of systematic bad faith</p>
+                </div>
+                <div id="impactContainer"></div>
+            </section>
+
+            <!-- Documents Section -->
+            <section id="documents" class="content-section">
+                <div class="section-header">
+                    <h2>Original Documents</h2>
+                    <p>Download complete case documentation</p>
+                </div>
+
+                <div class="documents-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Comprehensive Attorney Brief</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Complete legal brief documenting all claims, evidence, timeline, and legal violations. Contains detailed analysis of Progressive's systematic bad faith practices.</p>
+                            <p class="text-muted"><strong>Format:</strong> Microsoft Word (.docx)</p>
+                            <button class="btn btn-primary" onclick="downloadDocument('ATTORNEY_BRIEF_COMPREHENSIVE_COMPLETE.docx')">
+                                Download Attorney Brief
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Critical Correction Memo</h3>
+                        </div>
+                        <div class="card-body">
+                            <p>Critical clarification regarding policy manipulation by mother (policyholder) Dorothy Herd. Documents her removal of Travis from policy on day of accident and subsequent cooperation with Progressive.</p>
+                            <p class="text-muted"><strong>Format:</strong> Plain Text (.txt)</p>
+                            <button class="btn btn-primary" onclick="downloadDocument('CRITICAL_CORRECTION_MEMO.txt')">
+                                Download Critical Memo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Section -->
+            <section id="search" class="content-section">
+                <div class="section-header">
+                    <h2>Search Documents</h2>
+                    <p>Search through all case documentation</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="search-container">
+                            <input
+                                type="text"
+                                id="searchInput"
+                                class="search-input"
+                                placeholder="Enter search terms (e.g., 'bonded title', 'April 22', 'Dorothy Herd', 'Stanley Coker')..."
+                            >
+                            <button class="btn btn-primary" onclick="performSearch()">Search</button>
+                        </div>
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Case Information</h4>
+                    <p><strong>Claimant:</strong> Travis Herd</p>
+                    <p><strong>Defendant:</strong> Progressive Insurance Company</p>
+                    <p><strong>Claims:</strong> #25-822866566, #25-918737489</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal Status</h4>
+                    <p><strong>Duration:</strong> 219+ days unresolved</p>
+                    <p><strong>Confidence:</strong> 98% case strength</p>
+                    <p><strong>Updated:</strong> November 27, 2025</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <p>This website presents comprehensive evidence of systematic bad faith insurance practices, policy manipulation, regulatory corruption, and civil rights violations.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Travis Herd. All rights reserved. Documentation compiled for legal proceedings.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        ↑
+    </button>
+
+    <script src="app.js"></script>
+</body>
+</html>

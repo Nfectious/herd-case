@@ -1,0 +1,233 @@
+================================================================================
+                    VISUAL DEPLOYMENT WORKFLOW
+              claim.bsapservices.com on Contabo VPS
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         STEP 1: CLOUDFLARE DNS                          │
+│                              (2 minutes)                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  1. Login to Cloudflare                                                │
+│  2. Go to bsapservices.com → DNS                                       │
+│  3. Add A Record:                                                      │
+│     ┌──────────────────────────────────────────────┐                  │
+│     │ Type: A                                      │                  │
+│     │ Name: claim                                  │                  │
+│     │ IPv4: [YOUR_VPS_IP]                         │                  │
+│     │ Proxy: ✓ ON (orange cloud)                  │                  │
+│     │ TTL: Auto                                    │                  │
+│     └──────────────────────────────────────────────┘                  │
+│  4. SSL/TLS → Overview → Set to "Full"                                │
+│                                                                         │
+│  ✓ DNS configured!                                                     │
+└─────────────────────────────────────────────────────────────────────────┘
+                                  ↓
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       STEP 2: UPLOAD FILES TO VPS                       │
+│                              (2 minutes)                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  OPTION A: WinSCP (Easiest)                                            │
+│  ┌────────────────────────────────────────────────────┐                │
+│  │ 1. Open WinSCP                                     │                │
+│  │ 2. Connect to: root@YOUR_VPS_IP                    │                │
+│  │ 3. Left: C:\Users\nfectious\Downloads\claim       │                │
+│  │ 4. Right: /root/                                   │                │
+│  │ 5. Drag all files from left → right               │                │
+│  └────────────────────────────────────────────────────┘                │
+│                                                                         │
+│  OPTION B: Command Line (PowerShell)                                   │
+│  ┌────────────────────────────────────────────────────┐                │
+│  │ scp -r C:\Users\nfectious\Downloads\claim \       │                │
+│  │        root@YOUR_VPS_IP:/root/                     │                │
+│  └────────────────────────────────────────────────────┘                │
+│                                                                         │
+│  ✓ Files uploaded to VPS!                                              │
+└─────────────────────────────────────────────────────────────────────────┘
+                                  ↓
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      STEP 3: SSH TO VPS & DEPLOY                        │
+│                            (10-15 minutes)                              │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  3.1 Connect to VPS (from Windows PowerShell/CMD):                     │
+│  ┌────────────────────────────────────────────────────┐                │
+│  │ ssh root@YOUR_VPS_IP                               │                │
+│  └────────────────────────────────────────────────────┘                │
+│                                                                         │
+│  3.2 Move files to correct location:                                   │
+│  ┌────────────────────────────────────────────────────┐                │
+│  │ mv /root/claim /var/www/herd-case                  │                │
+│  │ cd /var/www/herd-case                              │                │
+│  └────────────────────────────────────────────────────┘                │
+│                                                                         │
+│  3.3 Run automated deployment:                                         │
+│  ┌────────────────────────────────────────────────────┐                │
+│  │ chmod +x deploy.sh                                 │                │
+│  │ sudo bash deploy.sh                                │                │
+│  └────────────────────────────────────────────────────┘                │
+│                                                                         │
+│  The script will automatically:                                        │
+│    ✓ Install Node.js                                                   │
+│    ✓ Install Nginx                                                     │
+│    ✓ Install PM2                                                       │
+│    ✓ Install Certbot                                                   │
+│    ✓ Install dependencies (npm install)                                │
+│    ✓ Find available port                                               │
+│    ✓ Start application with PM2                                        │
+│    ✓ Configure Nginx                                                   │
+│    ✓ Setup SSL certificate                                             │
+│    ✓ Configure firewall                                                │
+│                                                                         │
+│  When prompted: Press Enter to continue                                │
+│                                                                         │
+│  ✓ Deployment complete!                                                │
+└─────────────────────────────────────────────────────────────────────────┘
+                                  ↓
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      STEP 4: FINALIZE & TEST                            │
+│                              (1 minute)                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  4.1 Update Cloudflare SSL:                                            │
+│      - Cloudflare → SSL/TLS → Overview                                │
+│      - Change to: "Full (strict)"                                      │
+│                                                                         │
+│  4.2 Test website:                                                     │
+│      Open browser: https://claim.bsapservices.com                      │
+│                                                                         │
+│  4.3 Verify features:                                                  │
+│      ✓ Homepage loads                                                  │
+│      ✓ All 7 sections work                                             │
+│      ✓ Search works                                                    │
+│      ✓ Documents download                                              │
+│      ✓ Mobile responsive                                               │
+│                                                                         │
+│  ✓ Website is LIVE!                                                    │
+└─────────────────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+                           QUICK REFERENCE
+================================================================================
+
+DEPLOYMENT COMMANDS (Copy-Paste):
+----------------------------------
+
+# Step 1: Upload files (Windows PowerShell)
+scp -r C:\Users\nfectious\Downloads\claim root@YOUR_VPS_IP:/root/
+
+# Step 2: SSH to VPS
+ssh root@YOUR_VPS_IP
+
+# Step 3: Deploy (on VPS)
+mv /root/claim /var/www/herd-case
+cd /var/www/herd-case
+chmod +x deploy.sh
+sudo bash deploy.sh
+
+
+MANAGEMENT COMMANDS:
+--------------------
+pm2 status              # Check app status
+pm2 logs herd-case      # View logs
+pm2 restart herd-case   # Restart app
+systemctl status nginx  # Check Nginx
+systemctl reload nginx  # Reload Nginx
+
+
+FILE STRUCTURE ON VPS:
+----------------------
+/var/www/herd-case/
+├── server.js                    # Backend
+├── package.json                 # Dependencies
+├── deploy.sh                    # Deployment script
+├── public/
+│   ├── index.html              # Frontend
+│   ├── styles.css              # Styling
+│   └── app.js                  # JavaScript
+├── attorney_brief.txt           # Document 1
+├── CRITICAL_CORRECTION_MEMO.txt # Document 2
+└── ATTORNEY_BRIEF_*.docx       # Original DOCX
+
+
+WHAT THE SCRIPT DOES:
+---------------------
+✓ Checks system requirements
+✓ Installs Node.js (if needed)
+✓ Installs Nginx (if needed)
+✓ Installs PM2 process manager
+✓ Installs Certbot for SSL
+✓ Runs npm install
+✓ Finds available port (3000+)
+✓ Starts app with PM2
+✓ Configures PM2 auto-start
+✓ Creates Nginx configuration
+✓ Configures Cloudflare real IP
+✓ Obtains SSL certificate
+✓ Configures HTTPS redirect
+✓ Sets up firewall rules
+
+
+ESTIMATED TIME:
+---------------
+Total: ~15-20 minutes
+  Step 1 (DNS):        2 min
+  Step 2 (Upload):     2 min
+  Step 3 (Deploy):    10-15 min
+  Step 4 (Test):       1 min
+
+
+AFTER DEPLOYMENT:
+-----------------
+Your website will be live at:
+🌐 https://claim.bsapservices.com
+
+Features:
+✓ Professional legal documentation
+✓ 7 navigable sections
+✓ Full-text search
+✓ Document downloads
+✓ Mobile responsive
+✓ SSL secured (HTTPS)
+✓ Cloudflare protected
+✓ Auto-restart on crash
+✓ Auto-start on reboot
+
+
+TROUBLESHOOTING:
+----------------
+Problem: Website not loading
+Solution: Check DNS → nslookup claim.bsapservices.com
+
+Problem: SSL failed
+Solution: certbot --nginx -d claim.bsapservices.com
+
+Problem: App crashed
+Solution: pm2 logs herd-case
+
+Problem: Port conflict
+Solution: Script auto-finds available port
+
+
+SUPPORT FILES:
+--------------
+📄 QUICK_DEPLOY.txt              - Quick reference
+📄 DEPLOY_TO_CONTABO.md          - Full detailed guide
+📄 WINDOWS_UPLOAD_COMMANDS.txt   - Upload commands
+📄 README.md                     - Complete documentation
+
+
+================================================================================
+                        YOU'RE READY TO DEPLOY!
+================================================================================
+
+Start with Step 1: Configure Cloudflare DNS
+Then follow Steps 2-4 above
+
+Questions? Check DEPLOY_TO_CONTABO.md for detailed explanations
+
+🚀 Good luck! Your website will be live in ~15 minutes!
+
+================================================================================

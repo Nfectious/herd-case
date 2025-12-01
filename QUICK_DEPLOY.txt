@@ -1,0 +1,93 @@
+================================================================================
+  QUICK DEPLOYMENT GUIDE - Copy & Paste Commands
+  Domain: claim.bsapservices.com
+================================================================================
+
+STEP 1: CLOUDFLARE DNS (Do this first!)
+----------------------------------------
+1. Login to Cloudflare
+2. Go to DNS settings for bsapservices.com
+3. Add A record:
+   - Name: claim
+   - IPv4: [YOUR_VPS_IP]
+   - Proxy: ON (orange cloud)
+4. SSL/TLS → Set to "Full"
+
+
+STEP 2: UPLOAD FILES
+--------------------
+Option A - WinSCP (Easiest):
+  1. Open WinSCP
+  2. Connect to your VPS (root @ VPS_IP)
+  3. Upload entire folder: C:\Users\nfectious\Downloads\claim
+  4. Upload to: /root/ or /tmp/
+
+Option B - Command Line:
+  PowerShell: scp -r C:\Users\nfectious\Downloads\claim root@YOUR_VPS_IP:/root/
+
+
+STEP 3: SSH TO VPS & DEPLOY
+----------------------------
+From Windows PowerShell/CMD:
+
+ssh root@YOUR_VPS_IP
+
+Then run these commands:
+
+# Move files to correct location
+mv /root/claim /var/www/herd-case
+cd /var/www/herd-case
+
+# Make script executable
+chmod +x deploy.sh
+
+# Run automated deployment
+sudo bash deploy.sh
+
+# Follow prompts (press Enter when asked about SSL)
+
+DONE! Website will be live at: https://claim.bsapservices.com
+
+
+STEP 4: FINALIZE CLOUDFLARE
+----------------------------
+After deployment succeeds:
+1. Cloudflare → SSL/TLS
+2. Change to "Full (strict)"
+
+
+USEFUL COMMANDS
+---------------
+Check status:        pm2 status
+View logs:           pm2 logs herd-case
+Restart app:         pm2 restart herd-case
+Nginx status:        systemctl status nginx
+Reload Nginx:        systemctl reload nginx
+
+
+TROUBLESHOOTING
+---------------
+App not running?     pm2 logs herd-case
+Website not loading? nslookup claim.bsapservices.com
+SSL failed?          certbot --nginx -d claim.bsapservices.com
+
+
+IMPORTANT FILES
+---------------
+Application:  /var/www/herd-case/
+Nginx config: /etc/nginx/sites-available/herd-case
+Logs:         /var/log/nginx/herd-case_access.log
+
+
+TIME ESTIMATE
+-------------
+Total deployment time: 10-15 minutes
+  - DNS setup: 2 min
+  - Upload files: 2 min
+  - Run deployment: 5-10 min
+  - Testing: 1 min
+
+================================================================================
+That's it! Your website will be live and secure with SSL.
+Visit: https://claim.bsapservices.com
+================================================================================
